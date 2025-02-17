@@ -8,7 +8,9 @@
   "notebook_task": [
     {
       "notebook_path": "/Users/your_user_name/notebook1",
-      "base_parameters": {}
+      "base_parameters": {
+      "param1": "value1"
+    }
     },
     {
       "notebook_path": "/Users/your_user_name/notebook2",
