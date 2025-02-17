@@ -1,0 +1,22 @@
+{
+  "name": "sequential-notebooks-job",
+  "new_cluster": {
+    "spark_version": "7.3.x-scala2.12",
+    "node_type_id": "i3.xlarge",
+    "num_workers": 2
+  },
+  "notebook_task": [
+    {
+      "notebook_path": "/Users/your_user_name/notebook1",
+      "base_parameters": {}
+    },
+    {
+      "notebook_path": "/Users/your_user_name/notebook2",
+      "base_parameters": {}
+    },
+    {
+      "notebook_path": "/Users/your_user_name/notebook3",
+      "base_parameters": {}
+    }
+  ]
+}
