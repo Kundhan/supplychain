@@ -1,1 +1,30 @@
+name: Deploy and Run Multiple Notebooks on Databricks
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Databricks CLI
+      run: |
+        pip install databricks-cli
+        databricks configure --token
+
+    - name: Deploy Databricks Job with Multiple Notebooks
+      run: |
+        # Create job with the job_config.json that contains multiple notebooks
+        databricks jobs create --json-file job_config.json
+
+    - name: Run the Databricks Job
+      run: |
+        # Trigger the job to run in Databricks
+        job_id=$(databricks jobs list | grep "sequential-notebooks-job" | awk '{print $1}')
+        databricks jobs run-now --job-id $job_id
