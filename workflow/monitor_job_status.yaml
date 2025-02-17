@@ -1,0 +1,13 @@
+    - name: Monitor Job Run Status
+      run: |
+        # Wait for the job to complete
+        run_id=$(databricks jobs run-now --job-id $job_id | jq -r '.run_id')
+        status="RUNNING"
+        
+        while [[ "$status" == "RUNNING" ]]; do
+          status=$(databricks jobs get-run --run-id $run_id | jq -r '.state.life_cycle_state')
+          echo "Job is still $status"
+          sleep 10
+        done
+
+        echo "Job finished with status $status"
